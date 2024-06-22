@@ -9,21 +9,56 @@ import pandas as pd
 import numpy as np
 import time
 
-st.header("Project Title: Mental Health")
-st.write("About Dataset")
-This unique dataset was meticulously researched and prepared by AI Inventor Emirhan BULUT. It captures valuable information on social media usage and the dominant emotional state of users based on their activities. The dataset is ideal for exploring the relationship between social media usage patterns and emotional well-being. Features:
+st.header(":rainbow-background[Project Title: Mental Health]")
+""" **About Dataset** """
+st.write("This unique dataset was meticulously researched and prepared by AI Inventor Emirhan BULUT. It captures valuable information on social media usage and the dominant emotional state of users based on their activities. The dataset is ideal for exploring the relationship between social media usage patterns and emotional well-being. Features:")
 
 
 
-st.write("Files:")
-st.write("train.csv: Data for training models.")
-st.write(test.csv: Data for testing models.")
-st.write(val.csv: Data for validation purposes.")
+st.write("**Files:**")
+st.write("* train.csv: Data for training models")
+st.write("* test.csv: Data for testing models.")
+st.write("* val.csv: Data for validation purposes.")
 
+st.write("**Dataset Overview:**")
+st.write(":globe_with_meridians: Source: **Dataset is taken from** :blue[Kaggle]")
+st.write("**Columns:**")
+st.write("* User_ID: Unique identifier for the user.")
+st.write("* Age: Age of the user.")
+st.write("* Gender: Gender of the user (Female, Male, Non-binary).")
+st.write("* Platform: Social media platform used (e.g., Instagram, Twitter, Facebook, LinkedIn, Snapchat, Whatsapp, Telegram).")
+st.write("* Daily_Usage_Time (minutes): Daily time spent on the platform in minutes.")
+st.write("* Posts_Per_Day: Number of posts made per day.")
+st.write("* Likes_Received_Per_Day: Number of likes received per day.")
+st.write("* Comments_Received_Per_Day: Number of comments received per day.")
+st.write("* Messages_Sent_Per_Day: Number of messages sent per day.")
+st.write("* Dominant_Emotion: User's dominant emotional state during the day (e.g., Happiness, Sadness, Anger, Anxiety, Boredom, Neutral).")
 
+"""**Introduction:**"""
+"""Social media is a central point of our life. It has changed the way we live, work, and interact with others. As a result, it has become an essential part of our daily lives. The dataset here aims to provide valuable insights into social media usage and the dominant emotional state of users"""
+"""The goal of this project is to analyze the relation between social media trends and emotional well-being, and train the models."""
 
+"""**Importing Libraries**"""
 
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as snsb
+import plotly.express as px
 
+# Ignore Warnings
+import warnings
+warnings.filterwarnings("ignore")
+
+"""**Data loading**"""
+""" * We've 3 files:
+    - test.csv
+    - train.csv
+    - val.csv """
+
+train_df = pd.read_csv("../raw_data/train.csv", on_bad_lines='skip')
+test_df = pd.read_csv("../raw_data/test.csv", on_bad_lines='skip')
+val_df = pd.read_csv("../raw_data/val.csv", on_bad_lines='skip')
 
 # st.header(":rainbow[My first application], :+1: :sunglasses:")
 df = pd.DataFrame({
