@@ -10,11 +10,15 @@ import numpy as np
 import time
 
 st.header("Project Title: Mental Health")
+st.write("About Dataset")
+This unique dataset was meticulously researched and prepared by AI Inventor Emirhan BULUT. It captures valuable information on social media usage and the dominant emotional state of users based on their activities. The dataset is ideal for exploring the relationship between social media usage patterns and emotional well-being. Features:
 
 
 
-
-
+st.write("Files:<br>
+train.csv: Data for training models.<br>
+test.csv: Data for testing models.<br>
+val.csv: Data for validation purposes.<br>")
 
 
 
