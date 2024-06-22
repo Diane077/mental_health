@@ -15,10 +15,10 @@ This unique dataset was meticulously researched and prepared by AI Inventor Emir
 
 
 
-st.write("Files:
-train.csv: Data for training models.<br>
-test.csv: Data for testing models.<br>
-val.csv: Data for validation purposes.<br>")
+st.write("Files:")
+st.write("train.csv: Data for training models.")
+st.write(test.csv: Data for testing models.")
+st.write(val.csv: Data for validation purposes.")
 
 
 
