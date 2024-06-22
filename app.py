@@ -1,15 +1,4 @@
 import streamlit as st
-<<<<<<< HEAD
-
-
-import numpy as np
-import pandas as pd
-st.write('Hello Arvind')
-dataframe = pd.DataFrame(
-    np.random.randn(10, 20),
-    columns=('col %d' % i for i in range(20)))
-st.table(dataframe)
-=======
 import pandas as pd
 import os
 
@@ -55,4 +44,3 @@ st.write(val_df.isnull().sum())
 st.write('## Exploratory Data Analysis (EDA)')
 
 st.write(train_df.head())
->>>>>>> b14c5ec309e0f7711019bf9a51e7298852069f12
