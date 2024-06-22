@@ -9,7 +9,19 @@ import pandas as pd
 import numpy as np
 import time
 
-st.header(":rainbow[My first application], :+1: :sunglasses:")
+st.header("Project Title: Mental Health")
+
+
+
+
+
+
+
+
+
+
+
+# st.header(":rainbow[My first application], :+1: :sunglasses:")
 df = pd.DataFrame({
   'first column': [1, 2, 3, 4],
   'second column': [10, 20, 30, 40]
