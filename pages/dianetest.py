@@ -56,9 +56,17 @@ warnings.filterwarnings("ignore")
     - train.csv
     - val.csv """
 
-train_df = pd.read_csv("../raw_data/train.csv", on_bad_lines='skip')
-test_df = pd.read_csv("../raw_data/test.csv", on_bad_lines='skip')
-val_df = pd.read_csv("../raw_data/val.csv", on_bad_lines='skip')
+st.write(r"$\textsf{\Large I DON'T KNOW TO LOAD THE DATABASE}$")
+""":cry:"""
+
+train_df = pd.read_csv("train.csv", on_bad_lines='skip')
+test_df = pd.read_csv("test.csv", on_bad_lines='skip')
+val_df = pd.read_csv("val.csv", on_bad_lines='skip')
+
+
+
+
+
 
 # st.header(":rainbow[My first application], :+1: :sunglasses:")
 df = pd.DataFrame({
