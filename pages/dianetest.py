@@ -56,144 +56,87 @@ warnings.filterwarnings("ignore")
     - train.csv
     - val.csv """
 
-st.write(r"$\textsf{\Large I DON'T KNOW TO LOAD THE DATABASE}$")
-""":cry:"""
+import os
 
-train_df = pd.read_csv("train.csv", on_bad_lines='skip')
-test_df = pd.read_csv("test.csv", on_bad_lines='skip')
-val_df = pd.read_csv("val.csv", on_bad_lines='skip')
+cwd = os.getcwd()
+
+train_df = pd.read_csv(f'{cwd}/raw_data/train.csv',on_bad_lines='skip')
+test_df = pd.read_csv(f'{cwd}/raw_data/test.csv', on_bad_lines='skip')
+val_df = pd.read_csv(f'{cwd}/raw_data/val.csv', on_bad_lines='skip')
+
+# Display data
+st.write("Training Data:")
+st.write(train_df.head())
+st.write("----------------------------------------------------------------------")
+st.write("Testing Data:")
+st.write(test_df.head())
+st.write("----------------------------------------------------------------------")
+st.write("Validation Data:")
+st.write(val_df.head())
+
+# training data info
+print("Traing Data Info:")
+train_df.info()
+
+# testing data info
+print("Testing Data Info:")
+test_df.info()
 
 
+# validation data info
+print("Validation Data Info:")
+val_df.info()
+
+st.write("Shape of the training, testing, and validation data.")
+
+print(f"There are {train_df.shape[0]} rows and {train_df.shape[1]} columns in the training data.")
+print(f"There are {test_df.shape[0]} rows and {test_df.shape[1]} columns in the testing data.")
+print(f"There are {val_df.shape[0]} rows and {val_df.shape[1]} columns in the validation data.")
+
+# checking for null values
+print("Training Data:")
+display(train_df.isnull().sum())
+print("----------------------------------------------------------------------")
+print("Testing Data:")
+display(test_df.isnull().sum())
+print("----------------------------------------------------------------------")
+print("Validation Data:")
+display(val_df.isnull().sum())
 
 
+st.write("I can do 2 things to deal with null values:")
+st.write("Simple drop them as it is only 1 null value and might not affect our analysis.")
+st.write("Fill them with the mean, median, or mode depending on the value of the column.")
 
+st.write("Exploratory Data Analysis (EDA)")
+st.write("Let's start EDA with the training data.")
 
-# st.header(":rainbow[My first application], :+1: :sunglasses:")
-df = pd.DataFrame({
-  'first column': [1, 2, 3, 4],
-  'second column': [10, 20, 30, 40]
-})
+train_df.head()
 
-df
+st.write("Column in our data:")
 
-st.write(r"$\textsf{\Large Here's our first attempt at using data to create a table}$")
-st.write(pd.DataFrame({
-    'first column': [1, 2, 3, 4],
-    'second column': [10, 20, 30, 40]
-}))
+# list of coloums in the training data
+train_df.columns
 
-st.write(r"$\textsf{\Large Random table with 11 row and 21 column:}$")
-dataframe = np.random.randn(10, 20)
-st.dataframe(dataframe)
+st.write("Describe the training data")
+train_df.describe()
 
-st.write(r"$\textsf{\Large Let's expand on the first example using the Pandas Styler object to highlight some elements in the interactive table.}$")
-dataframe = pd.DataFrame(
-    np.random.randn(10, 20),
-    columns=('col %d' % i for i in range(20)))
+st.write("Age Distribution")
+train_df['Age'].isnull().sum()
+train_df['Age'].unique()
 
-st.dataframe(dataframe.style.highlight_max(axis=0))
+st.write("In the age coloum we have 4 irrigular values.")
+st.write("Male, Female, Non-binary, and other.")
+st.write("Let's drop/fill these values first")
 
-st.write(r"$\textsf{\Large We can use st.table()}$")
-dataframe = pd.DataFrame(
-    np.random.randn(10, 20),
-    columns=('col %d' % i for i in range(20)))
-st.table(dataframe)
+# removing the Male, Female, Non-binary, and işte mevcut veri kümesini 1000 satıra tamamlıyorum:
 
-st.write (r"$\textsf{\Large Line Chart}$")
-chart_data = pd.DataFrame(
-     np.random.randn(20, 3),
-     columns=['a', 'b', 'c'])
+# Replace non-numeric values with NaN
+train_df['Age'] = pd.to_numeric(train_df['Age'], errors='coerce')
 
-st.line_chart(chart_data)
+# Handle NaN values
+train_df['Age'].fillna(train_df['Age'].median(), inplace=True)
 
-st.write(r"$\textsf{\Large A map}$")
-map_data = pd.DataFrame(
-    np.random.randn(1000, 2) / [50, 50] + [-20.2, 57.5],
-    columns=['lat', 'lon'])
-
-st.map(map_data)
-
-st.write(r"$\textsf{\Large Widgets}$")
-x = st.slider('x')  # 👈 this is a widget
-st.write(x, 'squared is', x * x)
-
-st.write(r"$\textsf{\Large widgets as key}$")
-st.text_input("Your name", key="name")
-
-# You can access the value at any point with:
-st.session_state.name
-
-st.write(r"$\textsf{\Large Checkbox}$")
-st.write("checkbox")
-if st.checkbox('Show dataframe'):
-    chart_data = pd.DataFrame(
-       np.random.randn(20, 3),
-       columns=['a', 'b', 'c'])
-
-    chart_data
-
-st.write(r"$\textsf{\Large Selectbox for option}$")
-df = pd.DataFrame({
-    'first column': [1, 2, 3, 4],
-    'second column': [10, 20, 30, 40]
-    })
-
-option = st.selectbox(
-    'Which number do you like best?',
-     df['first column'])
-
-'You selected: ', option
-
-# Add a selectbox to the sidebar:
-add_selectbox = st.sidebar.selectbox(
-    'How would you like to be contacted?',
-    ('Email', 'Home phone', 'Mobile phone')
-)
-
-# Add a slider to the sidebar:
-add_slider = st.sidebar.slider(
-    'Select a range of values',
-    0.0, 100.0, (25.0, 75.0)
-)
-st.write(r"$\textsf{\Large To create a button}$")
-left_column, right_column = st.columns(2)
-# You can use a column just like st.sidebar:
-left_column.button('Press me!')
-
-# Or even better, call Streamlit functions inside a "with" block:
-with right_column:
-    chosen = st.radio(
-        'Sorting hat',
-        ("Gryffindor", "Ravenclaw", "Hufflepuff", "Slytherin"))
-    st.write(f"You are in {chosen} house!")
-
-'Starting a long computation...'
-
-# Add a placeholder
-latest_iteration = st.empty()
-bar = st.progress(0)
-
-for i in range(100):
-  # Update the progress bar with each iteration.
-  latest_iteration.text(f'Iteration {i+1}')
-  bar.progress(i + 1)
-  time.sleep(0.1)
-
-'...and now we\'re done!'
-
-if "counter" not in st.session_state:
-    st.session_state.counter = 0
-
-st.session_state.counter += 1
-
-st.header(f"This page has run {st.session_state.counter} times.")
-st.button("Run it again")
-
-st.write(r"$\textsf{\Large Simple the drawing of a chart}$")
-if "df" not in st.session_state:
-    st.session_state.df = pd.DataFrame(np.random.randn(20, 2), columns=["x", "y"])
-
-st.header("Choose a datapoint color")
-color = st.color_picker("Color", "#FF0000")
-st.divider()
-st.scatter_chart(st.session_state.df, x="x", y="y", color=color)
+train_df['Age'].unique()
+plt = px.histogram(train_df, x='Age', title='Age Distribution')
+plt.show()
