@@ -4,3 +4,4 @@ px
 scikit-learn
 matplotlib
 seaborn
+plotly
