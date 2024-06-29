@@ -377,6 +377,45 @@ y_pred_rf = rf_pipeline.predict(X_test)
 st.write("Random Forest Classifier Report:")
 st.write(classification_report(y_test, y_pred_rf))
 
+ageDF = pd.DataFrame({
+    'AGE': [20, 21, 22, 23, 24, 25]
+    })
+
+optionAge = st.selectbox(
+    'Age?',
+     ageDF['AGE'])
+
+
+platformDF = pd.DataFrame({
+    'AGE': ['Twitter', 'Facebook', 'LinkedIn', 'Snapchat', 'Whatsapp', 'Telegram', 'Instagram']
+    })
+
+optionPlatform = st.selectbox(
+    'Platform?',
+     platformDF['AGE'])
+
+
+
+
+# Example test data
+new_data = pd.DataFrame({
+    'Age': [optionAge],
+    'Gender': ['Male'],
+    'Platform': [optionPlatform],
+    'Daily_Usage_Time (minutes)': [20.0],
+    'Posts_Per_Day': [3.0],
+    'Likes_Received_Per_Day': [12.0],
+    'Comments_Received_Per_Day': [10.0],
+    'Messages_Sent_Per_Day': [12.0]
+})
+
+st.write(new_data)
+# Assuming you have already trained your rf_pipeline
+y_pred_new_data = rf_pipeline.predict(new_data)
+
+# Print the predicted labels
+st.write(y_pred_new_data)
+
 cv_cross_validation = cross_validate(rf_pipeline, X_train, y_train, cv=5, scoring=['f1_weighted'], n_jobs=-1)
 cv_cross_validation
 cv_cross_validation['test_f1_weighted'].mean()
