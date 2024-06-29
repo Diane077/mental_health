@@ -378,10 +378,10 @@ st.write("Random Forest Classifier Report:")
 st.write(classification_report(y_test, y_pred_rf))
 
 ageDF = pd.DataFrame({
-    'AGE': [20, 21, 22, 23, 24, 25]
+    'AGE': [ 21, 22, 23, 24, 25, 26,27,28,29,30]
     })
 
-optionAge = st.selectbox(
+optionAge = st.sidebar.selectbox(
     'Age?',
      ageDF['AGE'])
 
@@ -390,19 +390,33 @@ platformDF = pd.DataFrame({
     'AGE': ['Twitter', 'Facebook', 'LinkedIn', 'Snapchat', 'Whatsapp', 'Telegram', 'Instagram']
     })
 
-optionPlatform = st.selectbox(
-    'Platform?',
+optionPlatform = st.sidebar.selectbox(
+    'Platform',
      platformDF['AGE'])
 
+
+
+dailyUsageTimeDf = pd.DataFrame({
+    'USAGE': [ 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300]
+    })
+
+optionTime = st.sidebar.selectbox('opt', dailyUsageTimeDf['USAGE'])
+
+genderDf = pd.DataFrame({
+    'gender': [ 'Male', 'Female']
+    })
+
+gender = st.sidebar.selectbox('gender',
+     genderDf['gender'])
 
 
 
 # Example test data
 new_data = pd.DataFrame({
     'Age': [optionAge],
-    'Gender': ['Male'],
+    'Gender': [gender],
     'Platform': [optionPlatform],
-    'Daily_Usage_Time (minutes)': [20.0],
+    'Daily_Usage_Time (minutes)': [optionTime],
     'Posts_Per_Day': [3.0],
     'Likes_Received_Per_Day': [12.0],
     'Comments_Received_Per_Day': [10.0],
