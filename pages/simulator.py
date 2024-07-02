@@ -209,7 +209,7 @@ st.write(new_data)
 # Assuming you have already trained your rf_pipeline
 y_pred_new_data = rf_pipeline.predict(new_data)
 image_width = 150  # Set the desired width to make the image smaller
-image_path_sadness = Path(__file__).with_name('images/sad.png').relative_to(Path.cwd())
+image_path_sadness = 'https://raw.githubusercontent.com/Diane077/mental_health/master/images/sad.png'
 
 # Print the predicted labels
 st.write(y_pred_new_data[0])
