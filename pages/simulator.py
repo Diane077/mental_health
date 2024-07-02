@@ -182,7 +182,7 @@ dailyUsageTimeDf = pd.DataFrame({
     'USAGE': [ 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300]
     })
 
-optionTime = st.sidebar.selectbox('opt', dailyUsageTimeDf['USAGE'])
+optionTime = st.sidebar.selectbox('Daily Usage time (mins)', dailyUsageTimeDf['USAGE'])
 
 genderDf = pd.DataFrame({
     'gender': [ 'Male', 'Female', 'Non-binary', 'Unknown']
@@ -192,6 +192,17 @@ gender = st.sidebar.selectbox('gender',
      genderDf['gender'])
 
 
+postsDF = pd.DataFrame({
+    'POSTS_PER_DAY': [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+    'LIKES_PER_DAY': [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100],
+    'COMMENTS_PER_DAY': [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100],
+    'MESSAGES_SENT_PER_DAY': [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+})
+
+postsPerDay = st.sidebar.selectbox('Posts per day', postsDF['POSTS_PER_DAY'])
+likesPerDay = st.sidebar.selectbox('Likes per day', postsDF['LIKES_PER_DAY'])
+commentsPerDay = st.sidebar.selectbox('Comments per day', postsDF['COMMENTS_PER_DAY'])
+messagesSentPerDay = st.sidebar.selectbox('Messages sent per day', postsDF['MESSAGES_SENT_PER_DAY'])
 
 # Example test data
 new_data = pd.DataFrame({
@@ -199,10 +210,10 @@ new_data = pd.DataFrame({
     'Gender': [gender],
     'Platform': [optionPlatform],
     'Daily_Usage_Time (minutes)': [optionTime],
-    'Posts_Per_Day': [3.0],
-    'Likes_Received_Per_Day': [12.0],
-    'Comments_Received_Per_Day': [10.0],
-    'Messages_Sent_Per_Day': [12.0]
+    'Posts_Per_Day': [postsPerDay],
+    'Likes_Received_Per_Day': [likesPerDay],
+    'Comments_Received_Per_Day': [commentsPerDay],
+    'Messages_Sent_Per_Day': [messagesSentPerDay]
 })
 
 st.write(new_data)
@@ -210,9 +221,28 @@ st.write(new_data)
 y_pred_new_data = rf_pipeline.predict(new_data)
 image_width = 150  # Set the desired width to make the image smaller
 image_path_sadness = 'https://raw.githubusercontent.com/Diane077/mental_health/master/images/sad.png'
+image_path_anger = 'https://raw.githubusercontent.com/Diane077/mental_health/master/images/anger.png'
+image_path_anxiety = 'https://raw.githubusercontent.com/Diane077/mental_health/master/images/anxiety.png'
+image_path_bored = 'https://raw.githubusercontent.com/Diane077/mental_health/master/images/bored.png'
+image_path_happy = 'https://raw.githubusercontent.com/Diane077/mental_health/master/images/happy.png'
+image_path_neutral = 'https://raw.githubusercontent.com/Diane077/mental_health/master/images/neutral.png'
 
 # Print the predicted labels
 st.write(y_pred_new_data[0])
 if y_pred_new_data[0] == "Sadness":
-    # Center the image using Markdown and set the width
     st.markdown(f"<div style='text-align: center'><img src='{image_path_sadness}' width='{image_width}'></div>", unsafe_allow_html=True)
+
+if y_pred_new_data[0] == "Anger":
+    st.markdown(f"<div style='text-align: center'><img src='{image_path_anger}' width='{image_width}'></div>", unsafe_allow_html=True)
+
+if y_pred_new_data[0] == "Anxiety":
+    st.markdown(f"<div style='text-align: center'><img src='{image_path_anxiety}' width='{image_width}'></div>", unsafe_allow_html=True)
+
+if y_pred_new_data[0] == "Boredom":
+    st.markdown(f"<div style='text-align: center'><img src='{image_path_bored}' width='{image_width}'></div>", unsafe_allow_html=True)
+
+if y_pred_new_data[0] == "Happiness":
+    st.markdown(f"<div style='text-align: center'><img src='{image_path_happy}' width='{image_width}'></div>", unsafe_allow_html=True)
+
+if y_pred_new_data[0] == "Neutral":
+    st.markdown(f"<div style='text-align: center'><img src='{image_path_neutral}' width='{image_width}'></div>", unsafe_allow_html=True)
